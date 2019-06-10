@@ -7,7 +7,7 @@ import { TodoListItem } from './models';
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent {
-
+  // Jeff Was Here
   items: TodoListItem[] = [
     { description: 'Mow Grass', completed: false },
     { description: 'Clean Gutters', completed: false },

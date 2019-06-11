@@ -1,31 +1,36 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { TodoListItem } from './models';
+import { TodosDataService } from './todos-data.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.css']
 })
-export class TodoListComponent {
-  // Jeff Was Here
-  items: TodoListItem[] = [
-    { description: 'Mow Grass', completed: false },
-    { description: 'Clean Gutters', completed: false },
-    { description: 'Change Oil', completed: true }
-  ];
+export class TodoListComponent implements OnInit {
 
+  todos$: Observable<TodoListItem[]>;
+
+  constructor(private service: TodosDataService) {
+
+  }
+
+  ngOnInit() {
+    this.todos$ = this.service.getAll();
+  }
   markComplete(item: TodoListItem) {
-    item.completed = true;
+
   }
 
   add(what: string) {
     const description = what;
-    this.items.unshift({ description, completed: false });
+
 
 
   }
 
   clearCompleted() {
-    this.items = this.items.filter(item => !item.completed);
+
   }
 }

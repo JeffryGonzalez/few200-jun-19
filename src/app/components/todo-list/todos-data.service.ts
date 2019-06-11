@@ -28,8 +28,8 @@ export class TodosDataService {
 
   add(description: string) {
     this.http.post<TodoListItem>('http://localhost:3000/todos', { description })
-      .subscribe(r => {
-        this.cached.push(r);
+      .subscribe((r: TodoListItem) => {
+        this.cached = [r, ...this.cached];
         this.data.next(this.cached);
       });
   }

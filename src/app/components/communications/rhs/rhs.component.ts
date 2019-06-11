@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommunicationsService } from '../communications.service';
 
 @Component({
   selector: 'app-rhs',
@@ -8,13 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class RhsComponent implements OnInit {
 
   message = '';
-  constructor() { }
+  constructor(private service: CommunicationsService) { }
 
   ngOnInit() {
   }
 
   getIt() {
-    // do something here.
+    this.message = this.service.getMessage();
   }
 
 }

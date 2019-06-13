@@ -1,6 +1,9 @@
 
-import { createReducer } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
+import * as actions from '../actions/list.actions';
+
+
 export interface ShoppingEntity {
   id: string;
   description: string;
@@ -15,7 +18,7 @@ export const initialListState: ListState = {
   entities: {
     X03939: {
       id: 'X03939',
-      description: 'taco shells'
+      description: 'Beer'
     }
   }
 };
@@ -23,5 +26,6 @@ export const initialListState: ListState = {
 export const adapter = createEntityAdapter<ShoppingEntity>();
 
 export const reducer = createReducer(
-  initialListState
+  initialListState,
+  on(actions.itemAddedToList, (state, { entity }) => adapter.addOne(entity, state))
 );
